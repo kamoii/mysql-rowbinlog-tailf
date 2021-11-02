@@ -47,7 +47,7 @@ BEGIN
 COMMIT/*!*/;
 #+end_example
 
-* TODO
+* 残タスク
 
 順不同
 
