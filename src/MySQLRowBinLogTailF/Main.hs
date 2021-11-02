@@ -17,10 +17,10 @@ binlog の形式が row でなくても decodeRowBinLogEvent は適用可能ら�
 ただし ROW 系のイベントでない限り単に無視されるので適切に検出する必要がある。
 
 -}
-run :: IO ()
-run = do
-    bracket (connect defaultConnectInfo) close $ \conForBinLog -> do
-        bracket (connect defaultConnectInfo) close $ \conForColumnInfo -> do
+run :: ConnectInfo -> IO ()
+run ci = do
+    bracket (connect ci) close $ \conForBinLog -> do
+        bracket (connect ci) close $ \conForColumnInfo -> do
             let slaveId = 1234
             timeZone <- getCurrentTimeZone
             _ <- registerPesudoSlave conForBinLog slaveId

@@ -55,5 +55,8 @@ executable mysql-rowbinlog-tailf
   ghc-options: -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base ^>=4.14.3.0
+    , mysql-haskell
     , mysql-rowbinlog-tailf
+    , optparse-generic
+    , rio
   default-language: Haskell2010
