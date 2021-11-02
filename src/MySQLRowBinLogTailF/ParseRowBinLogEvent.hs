@@ -18,6 +18,11 @@ import Database.MySQL.Name
 import RIO
 import Prelude ()
 
+data LogEvent = LogEvent
+    { time :: LocalTime
+    , event :: Either QueryEvent ModifyEvent
+    }
+
 data ModifyEvent = ModifyEvent
     { schemaName :: SchemaName
     , tableName :: TableName
@@ -30,7 +35,7 @@ data TargetRows
     | Delete [[(ColumnInfo, MySQLValue)]]
 
 newtype QueryEvent = QueryEvent Query
-    deriving Show
+    deriving (Show)
 
 -- 失なわれたカラム情報を ColumnInfo から補いながら,本プログラムに必要なデータを
 -- 処理しやすい形で抽出する。
@@ -38,11 +43,11 @@ parseRowBinLogEvent ::
     TimeZone ->
     (SchemaName -> TableName -> IO [ColumnInfo]) ->
     RowBinLogEvent ->
-    IO (LocalTime, Either QueryEvent ModifyEvent)
+    IO LogEvent
 parseRowBinLogEvent timeZone getColumnInfo event = do
     let timestamp = getTyped @Word32 event
     let localTime = mkLocalTimeFromTimeStamp timeZone (fromIntegral timestamp)
-    (localTime,) <$> case event of
+    LogEvent localTime <$> case event of
         RowQueryEvent _ _ (QueryEvent' query) ->
             pure $ Left $ QueryEvent query
         RowWriteEvent _ _ tmEv wrEv ->

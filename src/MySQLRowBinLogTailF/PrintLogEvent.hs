@@ -7,7 +7,6 @@ module MySQLRowBinLogTailF.PrintLogEvent where
 import qualified Data.ByteString as BS
 import qualified Data.Text as T
 import Data.Text.ANSI (brightRed)
-import Data.Time (LocalTime)
 import Database.MySQL.Base (MySQLValue (..))
 import Database.MySQL.ColumnInfo (ColumnInfo (ColumnInfo, name))
 import Database.MySQL.Name
@@ -18,9 +17,9 @@ import RIO.List (intersperse)
 import RIO.Text (justifyRight)
 import Prelude ()
 
-printLogEvent :: (LocalTime, Either QueryEvent ModifyEvent) -> IO ()
-printLogEvent (localTime, event) = do
-    putUtf8BuilderLn $ "\n" <> displayShow localTime
+printLogEvent :: LogEvent -> IO ()
+printLogEvent LogEvent{time, event} = do
+    putUtf8BuilderLn $ "\n" <> displayShow time
     case event of
         Left queryEvent -> do
             putUtf8BuilderLn $ displayShow queryEvent
