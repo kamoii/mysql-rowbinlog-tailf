@@ -1,0 +1,59 @@
+#+TITLE: mysql-rowbinlog-tailf
+
+*WIP* (ただし最低限は使える)
+
+MySQL/MariaDBを使った開発において、INSERT/UPDATE/DELETEによるデータの変更をコンソールに吐き出す。
+
+* 使い方
+
+適切にMySQL/MariaDBの設定をした上で実行。
+
+: $ cabal run
+
+ただし現在は接続先は固定(TODO参照)。
+
+* MySQL/MariaDBの設定
+
+バイナリログを吐き出すには ~bin_log~ 設定が有効になっている必要がある。
+バイナリログの形式には ~row~ を設定する。
+~expire_logs_days~ を設定していないとバイナリログが溜って容量を圧迫する可能性がある。
+開発用に吐き出しているだけなので三日で消すように設定する。
+
+#+begin_example
+log_bin
+binlog_format=row
+expire_logs_days=3
+binlog_rows_query_log_events=on
+#+end_example
+
+* ~mysqlbinlog~ との違い
+
+mysql標準に付属している ~mysqlbinlog~ でもrow binlog の内容を吐き出せるが、
+内容が見づらい、binlogファイルを明示的指定する必要あり、など面倒。
+
+#+begin_example
+$ mysqlbinlog --read-from-remote-server --stop-never --base64-output=DECODE-ROWS --host=127.0.0.1 --port=3306 --user=root bin.000001
+# at 2636
+#211103  0:53:51 server id 1  end_log_pos 2674  GTID 0-1-832 trans
+/*!100001 SET @@session.gtid_seq_no=832*//*!*/;
+BEGIN
+/*!*/;
+# at 2674
+#211103  0:53:51 server id 1  end_log_pos 2779  Table_map: `test`.`sessions` mapped to number 18
+# at 2779
+#211103  0:53:51 server id 1  end_log_pos 2915  Update_rows: table id 18 flags: STMT_END_F
+# at 2915
+#211103  0:53:51 server id 1  end_log_pos 2942  Xid = 754
+COMMIT/*!*/;
+#+end_example
+
+* TODO
+
+順不同
+
+ * 接続情報をコマンドラインで指定でるようにする
+ * mysqlの設定が適切でないならちゃんとしたエラーメッセージ表示する
+ * mysqlの諸々のバージョンでテスト(というか mariadb の特定のバージョンでしか試していない)
+ * カラムの型によっては undefined 踏んで死ぬのを直す
+ * デカい値がカラムに入っていた場合でもよしなに表示
+ * 特定のデータベース、テーブルは無視できるように
