@@ -21,7 +21,7 @@ applicant_id: 104
 
 * 使い方
 
-事前にMySQL/MariaDBの設定を行なっておく必要がある。
+事前にMySQL/MariaDBの設定を行なう必要がある。
 
 #+begin_example
 Usage: mysql-rowbinlog-tailf [--host STRING] [--port INT] [--user TEXT]
@@ -36,7 +36,7 @@ Available options:
 バイナリログを吐き出すには ~bin_log~ 設定が有効になっている必要がある。
 バイナリログの形式には ~row~ を設定する。
 ~expire_logs_days~ を設定していないとバイナリログが溜って容量を圧迫する可能性がある。
-開発用に吐き出しているだけなので三日で消すように設定する。
+開発用に吐き出しているだけなので数日で消すように設定すること推奨。
 
 #+begin_example
 log_bin
