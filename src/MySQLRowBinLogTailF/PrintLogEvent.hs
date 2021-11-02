@@ -6,7 +6,7 @@ module MySQLRowBinLogTailF.PrintLogEvent where
 
 import qualified Data.ByteString as BS
 import qualified Data.Text as T
-import Data.Text.ANSI (brightRed)
+import Data.Text.ANSI (brightGreen, brightRed, brightYellow)
 import Database.MySQL.Base (MySQLValue (..))
 import Database.MySQL.ColumnInfo (ColumnInfo (ColumnInfo, name))
 import Database.MySQL.Name
@@ -24,12 +24,11 @@ printLogEvent LogEvent{time, event} = do
         Left queryEvent -> do
             putUtf8BuilderLn $ displayShow queryEvent
         Right ModifyEvent{schemaName, tableName, targetRows} -> do
-            putUtf8BuilderLn $ buildSchemaAndTableName schemaName tableName
             let (op, builders) = case targetRows of
-                    Insert rows -> ("INSERT", map buildColumns rows)
-                    Update rows -> ("UPDATE", map buildColumns2 rows)
-                    Delete rows -> ("DELETE", map buildColumns rows)
-            putUtf8BuilderLn op
+                    Insert rows -> (brightGreen "INSERT", map buildColumns rows)
+                    Update rows -> (brightYellow "UPDATE", map buildColumns2 rows)
+                    Delete rows -> (brightRed "DELETE", map buildColumns rows)
+            putUtf8BuilderLn $ display op <> " " <> buildSchemaAndTableName schemaName tableName
             for_ (zip [1 ..] builders) $ \(index, builder) -> do
                 putUtf8BuilderLn $
                     mconcat
@@ -52,9 +51,9 @@ buildColumns2 cols = mconcat . intersperse "\n" $ map buildColumnUpdate cols
         | before == after =
             display (adjustColumName cols col) <> ": " <> buildMySQLValue before col
         | otherwise =
-            display (brightRed (adjustColumName cols col <> ": "))
+            display (brightYellow (adjustColumName cols col <> ": "))
                 <> buildMySQLValue before col
-                <> display (brightRed " -> ")
+                <> display (brightYellow " -> ")
                 <> buildMySQLValue after col
 
 buildColumns :: [(ColumnInfo, MySQLValue)] -> Utf8Builder
