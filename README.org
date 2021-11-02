@@ -22,11 +22,15 @@ applicant_id: 104
 
 * 使い方
 
-適切にMySQL/MariaDBの設定をした上で実行。
+事前にMySQL/MariaDBの設定を行なっておく必要がある。
 
-: $ cabal run
+#+begin_example
+Usage: mysql-rowbinlog-tailf [--host STRING] [--port INT] [--user TEXT]
+                             [--password TEXT]
 
-ただし現在は接続先は固定(TODO参照)。
+Available options:
+  -h,--help                Show this help text
+#+end_example
 
 * MySQL/MariaDBの設定
 
@@ -68,7 +72,6 @@ COMMIT/*!*/;
 順不同
 
  * いい感じのGIFをREADMEに貼り付ける
- * 接続情報をコマンドラインで指定でるようにする
  * mysqlの設定が適切でないならちゃんとしたエラーメッセージ表示する
  * mysqlの諸々のバージョンでテスト(というか mariadb の特定のバージョンでしか試していない)
  * カラムの型によっては undefined 踏んで死ぬのを直す
