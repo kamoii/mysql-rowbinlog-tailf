@@ -4,6 +4,22 @@
 
 MySQL/MariaDBを使った開発において、INSERT/UPDATE/DELETEによるデータの変更をコンソールに吐き出す。
 
+#+begin_example
+$ cabal run
+BinLogTracker {btFileName = "bin.000001", btNextPos = 2942}
+
+2021-11-03 01:38:26
+test.sessions
+UPDATE
+[1]
+          id: 180
+applicant_id: 104
+        name: "test tarou"
+  created_at: 2021-11-03 00:36:54
+  updated_at: 2021-11-03 00:53:51 -> 2021-11-03 01:38:26
+
+#+end_example
+
 * 使い方
 
 適切にMySQL/MariaDBの設定をした上で実行。
@@ -51,6 +67,7 @@ COMMIT/*!*/;
 
 順不同
 
+ * いい感じのGIFをREADMEに貼り付ける
  * 接続情報をコマンドラインで指定でるようにする
  * mysqlの設定が適切でないならちゃんとしたエラーメッセージ表示する
  * mysqlの諸々のバージョンでテスト(というか mariadb の特定のバージョンでしか試していない)
