@@ -4,6 +4,8 @@
 
 MySQL/MariaDBを使った開発において、INSERT/UPDATE/DELETEによるデータの変更をコンソールに吐き出す。
 
+In development using MySQL/MariaDB, spit out data changes by INSERT/UPDATE/DELETE to the console.
+
 #+begin_example
 $ cabal run
 BinLogTracker {btFileName = "bin.000001", btNextPos = 2942}
