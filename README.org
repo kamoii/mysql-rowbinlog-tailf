@@ -33,6 +33,13 @@ Available options:
   -h,--help                Show this help text
 #+end_example
 
+* ビルド・インストール方法
+
+GHC 8.10.7
+
+: $ cabal build
+: $ cabal install
+
 * MySQL/MariaDBの設定
 
 バイナリログを吐き出すには ~bin_log~ 設定が有効になっている必要がある。
@@ -74,7 +81,7 @@ COMMIT/*!*/;
 
  * いい感じのGIFをREADMEに貼り付ける
  * mysqlの設定が適切でないならちゃんとしたエラーメッセージ表示する
- * mysqlの諸々のバージョンでテスト(というか mariadb の特定のバージョンでしか試していない)
+ * mysqlの諸々のバージョンでテスト(というか 特定の mariadbのバージョンでしか試していない)
  * カラムの型によっては undefined 踏んで死ぬのを直す
  * デカい値がカラムに入っていた場合でもよしなに表示
  * 特定のデータベース、テーブルは無視できるように
