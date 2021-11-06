@@ -4,11 +4,11 @@ import Data.Time (getCurrentTimeZone)
 import Database.MySQL.Base
 import Database.MySQL.BinLog
 import Database.MySQL.ColumnInfo (columnInfo)
-import MySQLRowBinLogTailF.ParseRowBinLogEvent (parseRowBinLogEvent, LogEvent)
+import MySQLRowBinLogTailF.ParseRowBinLogEvent (LogEvent, parseRowBinLogEvent)
 import MySQLRowBinLogTailF.PrintLogEvent (printLogEvent)
 import RIO
 import RIO.Extended
-import qualified System.IO.Streams as St
+import System.IO.Streams qualified as St
 import Prelude ()
 
 {-

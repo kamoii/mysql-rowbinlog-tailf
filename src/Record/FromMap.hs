@@ -19,7 +19,7 @@ module Record.FromMap (
 
 import Data.Bifunctor (first)
 import Data.Function ((&))
-import qualified Data.Map as Map
+import Data.Map qualified as Map
 import Data.Text (Text, pack)
 import GHC.Base (Constraint, Type)
 import GHC.Generics

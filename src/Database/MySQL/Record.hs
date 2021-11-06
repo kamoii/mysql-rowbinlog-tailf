@@ -11,7 +11,7 @@ module Database.MySQL.Record (
     -- executeUpdateDiff,
 ) where
 
-import qualified Data.Map as M
+import Data.Map qualified as M
 import Data.Scientific (Scientific)
 import Data.Time.Calendar (Day)
 import Data.Time.LocalTime (LocalTime)
@@ -20,7 +20,7 @@ import GHC.Generics (Generic (Rep))
 import RIO
 import Record.FromMap (FromMapError, GFromMap, fromMap)
 import System.IO.Streams (InputStream)
-import qualified System.IO.Streams.List as IOS
+import System.IO.Streams.List qualified as IOS
 import Prelude ()
 
 -- * from

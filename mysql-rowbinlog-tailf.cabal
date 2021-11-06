@@ -47,6 +47,8 @@ library
     , text-ansi
     , time
   default-language: Haskell2010
+  default-extensions:
+    ImportQualifiedPost
 
 executable mysql-rowbinlog-tailf
   main-is: Main.hs

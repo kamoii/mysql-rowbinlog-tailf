@@ -4,8 +4,8 @@
 
 module MySQLRowBinLogTailF.PrintLogEvent where
 
-import qualified Data.ByteString as BS
-import qualified Data.Text as T
+import Data.ByteString qualified as BS
+import Data.Text qualified as T
 import Data.Text.ANSI (brightGreen, brightRed, brightYellow)
 import Database.MySQL.Base (MySQLValue (..))
 import Database.MySQL.ColumnInfo (ColumnInfo (ColumnInfo, name))
