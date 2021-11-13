@@ -2,7 +2,7 @@
 
 *WIP* (ただし最低限は使える)
 
-MySQL/MariaDBを使った開発において、INSERT/UPDATE/DELETEによるデータの変更をコンソールに吐き出す。
+MySQL/MariaDBを使った開発において、INSERT/UPDATE/DELETEによるデータの変更をリアルタイムにコンソールに吐き出す。
 
 In development using MySQL/MariaDB, spit out data changes by INSERT/UPDATE/DELETE to the console.
 
