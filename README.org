@@ -1,8 +1,7 @@
 #+TITLE: mysql-rowbinlog-tailf
 
-*WIP* (ただし最低限は使える)
-
 MySQL/MariaDBを使った開発において、INSERT/UPDATE/DELETEによるデータの変更をリアルタイムにコンソールに吐き出す。
+開発時にDB変更回りのバグのデバッグや、引き継いだ良く分からないシステムのDB変更を把握したいときに便利。
 
 In development using MySQL/MariaDB, spit out data changes by INSERT/UPDATE/DELETE to the console.
 
