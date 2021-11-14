@@ -1,40 +1,44 @@
-cabal-version: 2.4
-name:           mysql-rowbinlog-tailf
-version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/kamoii/mysql-rowbinlog-tailf#readme>
-homepage:       https://github.com/kamoii/mysql-rowbinlog-tailf#readme
-bug-reports:    https://github.com/kamoii/mysql-rowbinlog-tailf/issues
-author:         kamoii
-maintainer:     example@example.com
-copyright:      2021 kamoii
-build-type:     Simple
+cabal-version:      2.4
+name:               mysql-rowbinlog-tailf
+version:            0.1.0.0
+description:
+  Please see the README on GitHub at <https://github.com/kamoii/mysql-rowbinlog-tailf#readme>
 
-extra-source-files:
-    README.org
+homepage:           https://github.com/kamoii/mysql-rowbinlog-tailf#readme
+bug-reports:        https://github.com/kamoii/mysql-rowbinlog-tailf/issues
+author:             kamoii
+maintainer:         example@example.com
+copyright:          2021 kamoii
+build-type:         Simple
+extra-source-files: README.org
 
 source-repository head
-  type: git
+  type:     git
   location: https://github.com/kamoii/mysql-rowbinlog-tailf
 
 library
   exposed-modules:
-      MySQLRowBinLogTailF.Main
-      MySQLRowBinLogTailF.ParseRowBinLogEvent
-      MySQLRowBinLogTailF.PrintLogEvent
+    MySQLRowBinLogTailF.Main
+    MySQLRowBinLogTailF.ParseRowBinLogEvent
+    MySQLRowBinLogTailF.PrintLogEvent
+
   other-modules:
-      Database.MySQL.BinLogValue
-      Database.MySQL.ColumnInfo
-      Database.MySQL.DataType
-      Database.MySQL.Name
-      Database.MySQL.Record
-      RIO.Extended
-      Record.FromMap
-      Record.ToMap
-  hs-source-dirs:
-      src
-  ghc-options: -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints
+    Database.MySQL.BinLogValue
+    Database.MySQL.ColumnInfo
+    Database.MySQL.DataType
+    Database.MySQL.Name
+    Database.MySQL.Record
+    Record.FromMap
+    Record.ToMap
+    RIO.Extended
+
+  hs-source-dirs:     src
+  ghc-options:
+    -Wall -Wcompat -Wincomplete-record-updates
+    -Wincomplete-uni-patterns -Wredundant-constraints
+
   build-depends:
-      base ^>=4.14.3.0
+    , base           ^>=4.14.3.0
     , bytestring
     , containers
     , generic-lens
@@ -46,19 +50,23 @@ library
     , text
     , text-ansi
     , time
-  default-language: Haskell2010
-  default-extensions:
-    ImportQualifiedPost
+
+  default-language:   Haskell2010
+  default-extensions: ImportQualifiedPost
 
 executable mysql-rowbinlog-tailf
-  main-is: Main.hs
-  hs-source-dirs:
-      app
-  ghc-options: -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  main-is:          Main.hs
+  hs-source-dirs:   app
+  ghc-options:
+    -Wall -Wcompat -Wincomplete-record-updates
+    -Wincomplete-uni-patterns -Wredundant-constraints -threaded
+    -rtsopts -with-rtsopts=-N
+
   build-depends:
-      base ^>=4.14.3.0
+    , base                   ^>=4.14.3.0
     , mysql-haskell
     , mysql-rowbinlog-tailf
     , optparse-generic
     , rio
+
   default-language: Haskell2010
